@@ -1,4 +1,32 @@
-body{
+:root {
+
+    --fundo: #eef2ff;
+    --calculadora: #ffffff;
+    --botao: #f1f5f9;
+    --botao-click: #c7d2fe;
+    --fonte: #1e293b;
+    --tema: #6366f1;
+    --visor: #f8fafc;
+    --operador: #dbeafe;
+    --igual: #6366f1;
+    --igual-hover: #4f46e5;
+}
+
+:root.darkmode {
+
+    --fundo: #0f172a;
+    --calculadora: #1e293b;
+    --botao: #334155;
+    --botao-click: #475569;
+    --fonte: #f8fafc;
+    --tema: #8b5cf6;
+    --visor: #0b1120;
+    --operador: #263b63;
+    --igual: #8b5cf6;
+    --igual-hover: #7c3aed;
+}
+
+body {
     display: flex;
     justify-content: center;
     height: 100vh;
@@ -6,60 +34,147 @@ body{
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #030303;
+    background-color: var(--fundo);
+    color: var(--fonte);
     flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.calculadora{
-    background-color: rgb(64, 63, 63);
+.calculadora {
+    background-color: var(--calculadora);
     width: 300px;
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow:
+        0 20px 40px rgba(15, 23, 42, 0.18),
+        0 4px 12px rgba(15, 23, 42, 0.08);
+    animation: subir 1s ease-out;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#visor{
+#visor {
     width: 100%;
     box-sizing: border-box;
-    height: 60px;
-    border: none;
-    border-radius: 6px;
-    background-color: #f0f0f0;
+    height: 65px;
+    padding: 0 15px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background-color: var(--visor);
+    color: var(--fonte);
     font-size: 25px;
     text-align: right;
-    margin-bottom: 15px;
+    margin-bottom: 17px;
+    outline: none;
+    box-shadow: inset 0 2px 5px rgba(15, 23, 42, 0.08);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.botoens{
+#visor:focus {
+    border-color: var(--tema);
+}
+
+.botoens {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     gap: 10px;
 }
 
-button{
+button {
     border: none;
     height: 60px;
-    border-radius: 6px;
+    border-radius: 12px;
     font-size: 20px;
-}
-
-button:hover{
-    background-color: #e8d0f2;
+    font-weight: 600;
+    color: var(--fonte);
+    background-color: var(--botao);
     cursor: pointer;
-    transition: 400ms;
-}
-button:active{
-    border-radius: 10px;
-    background-color: #6508b7;
-    transition: 10ms;
-}
-
-.zero{
-    grid-column: 1 / 3;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.igual{
+button:hover {
+    background-color: var(--botao-click);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(15, 23, 42, 0.15);
+}
+
+button:active {
+    transform: scale(0.96);
+    box-shadow: none;
+}
+
+
+.operador {
+    background-color: var(--operador);
+}
+
+
+.igual {
     grid-row: 4 / 6;
     height: 100%;
     grid-column: 4;
+    color: #ffffff;
+    background-color: var(--igual);
+}
+
+.igual:hover {
+    background-color: var(--igual-hover);
+}
+
+.zero {
+    grid-column: 1 / 3;
+}
+
+@keyframes subir {
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#botao_tema {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--tema);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    box-shadow: 0 6px 14px rgba(99, 102, 241, 0.3);
+}
+
+#botao_tema:hover {
+    background-color: var(--igual-hover);
+    transform: rotate(15deg) scale(1.08);
+}
+
+#botao_tema span:last-child {
+    display: none;
+}
+
+.darkmode #botao_tema span:first-child {
+    display: none;
+}
+
+.darkmode #botao_tema span:last-child {
+    display: block;
+}
+
+.darkmode #botao_tema {
+    background-color: var(--tema);
+    box-shadow: 0 0 18px rgba(139, 92, 246, 0.45);
 }

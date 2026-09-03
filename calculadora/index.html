@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora</title>
+    <script>
+        if (localStorage.getItem("darkmode") === "active") {
+            document.documentElement.classList.add("darkmode");
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <button id="botao_tema">
+        <span>⏾</span>
+        <span>☀︎</span>
+    </button>
+
     <div class="calculadora">
         <input type="text" disabled id="visor" value=''>
         <div class="botoens">
@@ -25,11 +37,12 @@
             <button onclick="inseririr_visor('1')">1</button>
             <button onclick="inseririr_visor('2')">2</button>
             <button onclick="inseririr_visor('3')">3</button>
-            <button class="zero"  onclick="inseririr_visor('0')">0</button>
+            <button class="zero" onclick="inseririr_visor('0')">0</button>
             <button onclick="inseririr_visor('.')">.</button>
-            <button class="igual" onclick="inseririr_visor('=')">=</button>
+            <button class="igual" onclick="resultado()">=</button>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
